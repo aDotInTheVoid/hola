@@ -1,0 +1,120 @@
+# When writing other languages, don't use clang-format
+# Note this also means c because cpp has infected c
+Language:        Cpp
+
+# LLVM is generaly sensable defaults. Dont change this because it will mean
+# all the times I've confermed I agree with clang will need to be redone.
+BasedOnStyle:  LLVM
+
+# This is realy dumb but so far clang-format makes me do it.
+# when https://reviews.llvm.org/D22505 gets merged this should be changed.
+# But andway science we arn't writing clases it should be fine.
+# I'd like to do it like
+# https://github.com/openframeworks/openFrameworks/wiki/oF-code-style#indentation
+# but I cant
+AccessModifierOffset: -2
+
+# Lovely Allignment
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignEscapedNewlines: Right
+AlignOperands:   true
+AlignTrailingComments: true
+
+# Only put empty funcs on one line. Improves readability and PEP8.
+# void f() {}
+# void f2() {
+#   bar2();
+# }
+AllowShortFunctionsOnASingleLine: Empty
+
+
+BraceWrapping:
+  # class foo {};
+  #NOT
+  # class foo
+  # {};
+  AfterClass:      true
+ 
+  # Generaly use
+  # `{}`
+  # Not
+  # `{
+  #  }`
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+
+# easy to match operators with operands
+# `income = (gross_wages
+#            + taxable_interest
+#            + (dividends - qualified_dividends)
+#            - ira_deduction
+#            - student_loan_interest)`
+# Not
+# `income = (gross_wages +
+#            taxable_interest +
+#            (dividends - qualified_dividends) -
+#            ira_deduction -
+#            student_loan_interest)`
+# Stolen from PEP8
+BreakBeforeBinaryOperators: NonAssignment
+
+# Tecnicly this is LLVM but I wanted to include it because it's
+# important. Always attach braces to surrounding context.
+BreakBeforeBraces: Attach
+
+# Merge multiple #include blocks together and sort as one.
+# Then split into groups based on category priority
+# # include "b.h"               into      #include "a.h"
+#                                         include "b.h"
+# # include <lib/main.h>
+# # include "a.h"                         #include <lib/main.h>
+IncludeBlocks:   Regroup
+
+# Always indent. Their is no excuse not to.
+# switch (fool) {                vs.     switch (fool) {
+# case 1:                                  case 1:
+#   bar();                                   bar();
+#   break;                                   break;
+# default:                                 default:
+#   plop();                                  plop();
+# }                                      }
+IndentCaseLabels: true
+
+# Also LLVM default but needs explaining given the previous choice.
+# Scince often entire h files are in PP guardrails, it doesn't make
+# sence to indent entire header files.
+IndentPPDirectives: None
+
+# Because I came from python
+IndentWidth:     4
+
+# PEP 257 -- Docstring Conventions sais no blanks around new lines and this
+# maps nicely.
+# true:                                  false:
+# if (foo) {                     vs.     if (foo) {
+#                                          bar();
+#   bar();                               }
+# }
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# Again for pep8 complience
+MaxEmptyLinesToKeep: 2
+
+# Indent only in inner namespaces (nested in other namespaces).
+# This is for the same reason as not indenting preprocessor stuff.
+# Make sure namespace comments are right to compensate.
+NamespaceIndentation: Inner
+FixNamespaceComments: true
+
+# TODO: Change me. I'm not sure
+PointerAlignment: Right
+
+# Treat casts like a unary op
+# true:                                  false:
+# (int) i;                       vs.     (int)i;
+SpaceAfterCStyleCast: true
+
+# Differenciate trailing comments from code
+SpacesBeforeTrailingComments: 2
