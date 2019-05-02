@@ -6,7 +6,7 @@ sudo: false
 language: c
 before_script:
     - EXE_NAME="hola"
-    - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then EXE_NAME="hola.exe"; fi
+    - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then EXE_NAME="Debug/hola.exe"; fi
 script:
     - mkdir build && cd build
     - cmake ..
