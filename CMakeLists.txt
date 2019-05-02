@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 include(CheckIncludeFile)
 include(CheckFunctionExists)
 project(hola)
-
+set_property(TARGET hola PROPERTY C_STANDARD 99)
 check_include_file(stdio.h HAVE_STDIO_H)
 if(NOT HAVE_STDIO_H)
     message("FATAL: stdio.h not found")
